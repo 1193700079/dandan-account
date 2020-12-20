@@ -33,10 +33,8 @@ create.Page(store, {
         mode: 'targetInfo',
       },
       success(res) {
-        console.log('res', res)
         if (res.result.code === 1) {
           const targetInfo = res.result.data
-          console.log('targetInfo', targetInfo)
           const allDate = self.getDates(new Date(targetInfo.targetData.createTime), new Date(targetInfo.targetData.endDate))
           const toFinishDate = self.getDates(new Date(), new Date(targetInfo.targetData.endDate))
           self.setData({

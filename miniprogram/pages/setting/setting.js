@@ -129,7 +129,6 @@ Page({
             fileList: [res.result.data.fileID],
             success: (tempRes) => {
               // eslint-disable-next-line no-console
-              console.log(tempRes.fileList)
               wx.setClipboardData({
                 data: tempRes.fileList[0].tempFileURL,
                 success() {},
