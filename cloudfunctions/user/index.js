@@ -10,12 +10,10 @@ exports.main = async (event) => {
   const wxContext = cloud.getWXContext()
   cloud.updateConfig({
     env: wxContext.ENV === 'local' ? 'release-wifo3' : wxContext.ENV,
-
   })
   // 初始化数据库
   const db = cloud.database({
     env: wxContext.ENV === 'local' ? 'release-wifo3' : wxContext.ENV,
-
   });
   if (event.mode === 'add') {
     db.collection('USERS').add({
