@@ -1,10 +1,34 @@
 .banner {
   width: 100%;
   height: 410rpx;
-  background: linear-gradient(40deg,#ff6ec4,#5e72e4);
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.banner-bg {
+  width: 100%;
+  height: 410rpx;
+  position: fixed;
+  z-index: -1;
+}
+.banner-special {
+  width: 100%;
+  height: 410rpx;
+  background: linear-gradient(40deg, #f6c3d1, #e8bffe);
+  position: fixed;
+  z-index: -1;
+}
+.banner-img-bg1 {
+  background-image: url("https://wx4.sinaimg.cn/mw690/82f26360gy1gaa4n3pz01g20ia09px6p.gif");
+}
+.banner-img-bg2 {
+  background-image: url("https://wx3.sinaimg.cn/mw690/82f26360gy1gabawajibxg20ia09p7wi.gif");
+}
+.banner-img-bg3 {
+  background-image: url("https://wx4.sinaimg.cn/mw690/82f26360gy1gabaqvv0yog20ia09pqmw.gif");
+}
+.banner-img-bg4 {
+  background-image: url("https://wx1.sinaimg.cn/mw690/82f26360gy1gabb5vsfchg20ia09pwyo.gif");
 }
 .banner-show {
   display: flex;
@@ -44,17 +68,25 @@
   height: 80rpx;
   text-align: right;
   width: 100%;
+  position: relative;
+  z-index: 9;
+}
+.section .label {
+  word-break: keep-all;
+  white-space: nowrap;
 }
 .input-field {
   display: flex;
   align-items: center;
   position: relative;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
+  width: 100%;
 }
 .default-text {
   position: absolute;
   right: 0;
+  line-height: 80rpx;
 }
 .cate {
   margin: 10rpx 16rpx;
@@ -97,6 +129,8 @@
 }
 .select-field {
   display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }
 .select-date {
   width: 100%;
@@ -136,7 +170,18 @@
   word-break: break-all;
   word-wrap: break-word;
   overflow: hidden;
+  text-align: left;
 }
 .active-paytype {
   color: #ff6ec4;
+}
+.target-toast {
+  border: 1rpx solid #fde998;
+  background-color: #faf6e7;
+  padding: 16rpx;
+  border-radius: 24rpx;
+  width: fit-content;
+  font-size: 26rpx;
+  margin: 0 auto;
+  transition: 0.5s ease-in-out;
 }

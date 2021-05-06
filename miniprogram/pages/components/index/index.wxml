@@ -1,11 +1,24 @@
+<view
+  wx:if="{{wordData.bannerurl && wordData.show && nowTime <= wordData.urlExpire && !loadingWord}}"
+  class="banner-bg"
+  style="background-image: url('{{wordData.bannerurl}}');background-size: cover;"
+>
+
+</view>
+<view wx:else class="banner-bg banner-special"></view>
 <view class="banner">
   <view class="banner-show" wx:if="{{clickPigNum < 5}}">
     <image
       src="https://images.vrm.cn/2019/08/29/pig.png"
-      style="width: 150rpx;height: 150rpx;"
+      style="width: 150rpx;height: 150rpx;opacity: {{wordData.bannerurl && wordData.show && nowTime <= wordData.urlExpire && !loadingWord ? '0.8' : '1'}}"
       bindtap="clickPig"
     ></image>
-    <view class='pig-talk' bindtap="closeTalk" data-word="{{wordData}}" wx:if="{{wordData}}">
+    <view
+      class='pig-talk'
+      bindtap="closeTalk"
+      data-word="{{wordData}}"
+      wx:if="{{wordData.word && wordData.show && nowTime <= wordData.expire && !loadingWord}}"
+    >
       <view class='word-tang-left'></view>
       <view class='word-detail'>{{wordData.word}}</view>
     </view>
@@ -26,7 +39,7 @@
     class="tab-item {{active_tab === 1 ? 'active-tab' : ''}}"
   >收入</view>
 </view>
-<form bindsubmit="formSubmit">
+<form>
   <view
     wx:if="{{isEdit}}"
     class="edit-tip"
@@ -53,7 +66,7 @@
       >0.00</text>
     </view>
   </view>
-  <view class="section" bindtap="goToCategory" style="height: 84rpx;">
+  <view class="section" style="height: 84rpx;" catchtap="goToCategory">
     <view class="label">分类</view>
     <view class="input-field" style="flex-direction: row;">
       <view
@@ -63,8 +76,18 @@
       >
       {{selectedCategory.categoryName}}
       </view>
-
-      <view class="cate" catchTap="goToCategory" style="margin-right: 0;">...</view>
+      <picker
+        mode="selector"
+        range="{{recentCate}}"
+        range-key="categoryName"
+        value="{{active_date_time}}"
+        bindchange="bindCateChange"
+        catchtap="doNothing"
+        wx:if="{{recentCate.length && active_tab === 0}}"
+      >
+        <view class="cate">常用</view>
+      </picker>
+      <view class="cate" catchtap="goToCategory" style="margin-right: 0;">...</view>
     </view>
   </view>
   <view class="section">
@@ -108,7 +131,7 @@
     </view>
   </view>
   <view class="section" style="border-bottom: none;">
-    <view class="label" wx:if="{{showPayType}}" bindtap="onShowPayTypeDialog">备注/{{payType}}</view>
+    <view class="label" wx:if="{{showPayType}}" bindtap="onShowPayTypeDialog">备注{{payType ? '/' : ''}}{{payType}}</view>
     <view class="label" wx:else>备注</view>
     <view class="input-field" style="width: {{showPayType ? '60' : '80'}}%;">
       <input
@@ -124,6 +147,7 @@
   <view class="btn-area">
     <button bindtap="submitForm" class="warn" wx:if="{{!loadingCreate}}">{{isEdit ? '编辑' : '确认'}}</button>
     <button class="warn" style="opacity: .5;" wx:else>{{isEdit ? '编辑' : '创建'}}中...</button>
+    <view class="target-toast" wx:if="{{showTargetTip && targetTip && $.myTarget}}">{{targetTip}}</view>
   </view>
 </form>
 <!-- 支付方式弹窗 -->
@@ -133,10 +157,24 @@
     <view class="d-header">
       选择本笔账单的支付方式
     </view>
-    <view class="list-item-btn {{payType === '支付宝' ? 'active-paytype' : ''}}" bindtap="selectType" data-paytype="支付宝">支付宝</view>
-    <view class="list-item-btn {{payType === '微信' ? 'active-paytype' : ''}}" bindtap="selectType" data-paytype="微信">微信</view>
-    <view class="list-item-btn {{payType === '信用卡' ? 'active-paytype' : ''}}" bindtap="selectType" data-paytype="信用卡">信用卡</view>
-    <view class="list-item-btn {{payType === '掌上生活' ? 'active-paytype' : ''}}" bindtap="selectType" data-paytype="掌上生活">掌上生活</view>
+    <view
+      wx:for="{{payTypeList}}"
+      class="list-item-btn {{payType === item ? 'active-paytype' : ''}}"
+      bindtap="selectType"
+      wx:key="item"
+      data-paytype="{{item}}"
+    >{{item || '无'}}</view>
+    <view class='list-item-btn' bindtap="closeDialog" style="border-bottom: none;">取消</view>
+  </view>
+</dialog>
+<dialog visible="{{showAuthDialog}}" bind:closeDialog="closeDialog">
+  <view slot="content">
+    <view class="pop-indicator"></view>
+    <view class="d-header">
+      订阅信息开启失败
+      <view class="dialog-tip">由于你的设备拒绝了订阅权限，我们无法主动替你开启。请打开设置进行手动开启～</view>
+    </view>
+    <view class='list-item-btn' style="color: #4fd69c;" bindtap="openSetting">打开设置</view>
     <view class='list-item-btn' bindtap="closeDialog" style="border-bottom: none;">取消</view>
   </view>
 </dialog>

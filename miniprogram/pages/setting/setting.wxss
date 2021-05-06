@@ -1,0 +1,100 @@
+page {
+  background: #fff;
+}
+.setting {
+  margin-bottom: 50rpx;
+}
+.part {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.part .left {
+  width: 20%;
+  padding: 48rpx 20rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.part .right {
+  width: 54%;
+  border-radius: 38rpx;
+  padding: 48rpx;
+}
+.part-hot {
+  border: 6rpx solid rgb(255, 68, 136);
+  padding: 42rpx;
+}
+
+.dandan {
+  color: #fff;
+}
+
+.dandan .title {
+  font-size: 28rpx;
+  font-weight: 600;
+  margin-bottom: 10rpx;
+}
+.dandan .desc {
+  font-size: 24rpx;
+}
+.dandan .pig {
+  width: 100rpx;
+  height: 100rpx;
+  float: right;
+}
+.notify-status {
+  font-size: 34rpx;
+  margin-top: 20rpx;
+  text-align: right;
+}
+.fill {
+  width: 100%;
+  height: 200rpx;
+}
+.invite-btn {
+  background: none;
+  padding: 0;
+  width: 100rpx;
+  display: flex;
+  margin: 20rpx 0;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  float: right;
+  color: #fff;
+}
+.sub-text {
+  font-size: 22rpx;
+  line-height: 80rpx;
+}
+.donate-img {
+  height: 256rpx;
+  width: 256rpx;
+  margin: 0 auto;
+  display: block;
+  margin-bottom: 100rpx;
+}
+.donate-arrow {
+  width: 32rpx;
+  height: 32rpx;
+  display: block;
+  margin: 200rpx auto;
+}
+.lists {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 0 15rpx;
+}
+.list-item {
+  width: 120rpx;
+  margin: 10rpx;
+  height: 120rpx;
+  border-radius: 99999rpx;
+  display: block;
+  box-shadow: 1px 6px 4px 0px #e8e8e8;
+  border: 1rpx solid #ebeef5;
+}

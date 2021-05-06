@@ -1,34 +1,35 @@
-Component({
+const { importStore } = getApp()
+const { create, store } = importStore
+create.Component(store, {
   externalClasses: ['my-class', 'my-icon-class'],
   options: {
-    multipleSlots: true
+    multipleSlots: true,
   },
   properties: {
     bgColor: {
       type: String,
-      value: 'rgba(0,0,0,0)'
+      value: 'rgba(0,0,0,0)',
     },
     showIcons: {
-      type: Array
-    }
+      type: Array,
+    },
   },
   data: {
     showBackIcon: false,
     showIssue: false,
     showSearch: false,
-    showBannerSetting: false
+    showBannerSetting: false,
+    showSetting: false,
   },
   ready() {
-    let {
-      statusBarHeight
-    } = getApp().globalData
     const { showIcons } = this.data
     this.setData({
-      statusBarHeight,
+      statusBarHeight: store.data.sysInfo.statusBarHeight,
       showBackIcon: showIcons.includes('back'),
       showIssue: showIcons.includes('bug'),
       showBannerSetting: showIcons.includes('banner'),
       showSearch: showIcons.includes('search'),
+      showSetting: showIcons.includes('setting'),
     })
   },
   attached() {
@@ -37,21 +38,31 @@ Component({
     back() {
       wx.navigateBack({
         delta: 1,
-        fail(error) {
+        fail() {
           wx.redirectTo({
             url: '/pages/tab/tab',
           })
-        }
+        },
       })
     },
     goTo(event) {
       const { page } = event.currentTarget.dataset
       wx.navigateTo({
-        url: `/pages/${page}/${page}`
+        url: `/pages/${page}/${page}`,
       })
     },
     showBanner() {
       this.triggerEvent('showBanner')
-    }
-  }
+    },
+    goTotarget() {
+      const { myTarget } = store.data
+      let path = '/pages/target-set/target-set'
+      if (myTarget && myTarget._id) {
+        path = '/pages/target/target'
+      }
+      wx.navigateTo({
+        url: path,
+      })
+    },
+  },
 })

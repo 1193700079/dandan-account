@@ -7,29 +7,39 @@
     <view class='nav-icon-view-back' bindlongtap='showBanner' wx:if="{{showBannerSetting}}"></view>
     <view class='nav-icon-view-back' wx:if="{{showIssue}}">
       <button
-        style="border: none;"
+        style="border: none;margin: 0;padding: 0;background-size: cover;background-image: url('https://i.loli.net/2021/05/05/1OKgrScoY5yU26l.png')"
         plain='true'
         class='nav-icon issue'
-        open-type="feedback"
+        open-type="contact"
       ></button>
     </view>
-    <view class='nav-icon-view-back' wx:if="{{showSearch}}">
-      <button
-        style="border: none;height: 39rpx;"
-        plain='true'
-        class='nav-icon more-chart'
-        bindtap="goTo"
-        data-page="morechart"
-      ></button>
+    <view class='nav-icon-view-back' wx:if="{{showSearch}}" bindtap="goTo" data-page="morechart">
+      <image
+        src="https://i.loli.net/2021/05/05/39Cjh4ODMvaIHzr.png"
+        mode="widthFix"
+        class="nav-icon"
+      ></image>
     </view>
-    <view class='nav-icon-view-back' wx:if="{{showSearch}}">
-      <button
-        style="border: none;height: 39rpx;"
-        plain='true'
-        class='nav-icon search'
-        bindtap="goTo"
-        data-page="search"
-      ></button>
+    <view class='nav-icon-view-back' wx:if="{{showSearch}}" bindtap="goTo" data-page="search">
+      <image
+        src="https://i.loli.net/2021/05/05/CWipmBbx45Z3IGy.png"
+        mode="widthFix"
+        class="nav-icon"
+      ></image>
+    </view>
+    <view class='nav-icon-view-back' wx:if="{{showSetting}}" bindtap="goTotarget">
+      <image
+        src="https://i.loli.net/2021/05/05/7rVXgmJCuj6dPf3.png"
+        mode="widthFix"
+        class="nav-icon"
+      ></image>
+    </view>
+    <view class='nav-icon-view-back' wx:if="{{showSetting}}" bindtap="goTo" data-page="setting">
+      <image
+        src="https://i.loli.net/2021/05/05/8GP63NsgpcOohDQ.png"
+        mode="widthFix"
+        class="nav-icon"
+      ></image>
     </view>
   </view>
 </view>

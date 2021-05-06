@@ -4,7 +4,7 @@
   bind:showBanner="onShowBanner"
 ></nav>
 <view class="category">
-  <view wx:if="{{localCategory.length > 0}}" class="item" style="background: #4fd69c;">
+  <view wx:if="{{localCategory2155.length > 0}}" class="item" style="background: #4fd69c;">
     <view class="parent-name">
       常用分类
     </view>
@@ -13,14 +13,14 @@
         bindtap="selectCategory"
         data-category="{{child}}"
         class="child"
-        wx:for="{{localCategory}}"
+        wx:for="{{localCategory2155}}"
         wx:for-item="child"
         wx:key="{{child._id}}"
       >
         <view class="name">{{child.categoryName}}
           <image
             class="delete-icon"
-            wx:if="{{child.openId !== 'SYSTEM'}}"
+            wx:if="{{child.openId !== 'SYSTEM' && isEdit}}"
             src="../../images/backspace-arrow.png"
             style="width: 28rpx;height: 28rpx;"
             catchtap="showMenu"
@@ -101,7 +101,7 @@
   <view slot="content">
     <view class="pop-indicator"></view>
     <view class="d-header">
-      设置Banner语句
+      设置Banner信息
     </view>
     <input
       value="{{word}}"
@@ -110,9 +110,67 @@
       placeholder="输入语句"
       class="fill-cate"
     ></input>
-    
-    <view class='list-item-btn' style="color: #4fd69c;" bindtap="confirmUpdateBanner" wx:if="{{!loadingSetting}}">确认</view>
-    <view class='list-item-btn' style="color: #4fd69c;" wx:else>设置中...</view>
+    <picker
+      mode="date"
+      value="{{wordExpired}}"
+      bindchange="bindWordDateChange"
+      start="{{defaultExpire}}"
+      class="fill-cate"
+    >
+      <view class="expired" style="margin-right: 0;">{{wordExpired || '选择语句结束日期'}}</view>
+    </picker>
+    <view class='list-item-btn' style="color: #4fd69c;" bindtap="confirmUpdateBanner" wx:if="{{!loadingSetting}}">确认语句</view>
+    <view class='list-item-btn' style="color: #4fd69c;" wx:else>设置语句中...</view>
+    <input
+      value="{{bannerurl}}"
+      data-name="bannerurl" 
+      bindinput="bindInput"
+      placeholder="输入背景图链接"
+      class="fill-cate"
+    ></input>
+    <picker
+      mode="date"
+      value="{{urlExpired}}"
+      bindchange="bindUrlDateChange"
+      start="{{defaultExpire}}"
+      class="fill-cate"
+    >
+      <view class="expired" style="margin-right: 0;">{{urlExpired || '选择链接结束日期'}}</view>
+    </picker>
+    <view class='list-item-btn' style="color: #4fd69c;" bindtap="confirmUpdateBannerUrl" wx:if="{{!loadingBannerUrl}}">确认背景图</view>
+    <view class='list-item-btn' style="color: #4fd69c;" wx:else>设置背景图中...</view>
+    <input
+      value="{{donateurl}}"
+      data-name="donateurl" 
+      bindinput="bindInput"
+      placeholder="输入捐赠人头像地址"
+      class="fill-cate"
+    ></input>
+    <input
+      value="{{donatename}}"
+      data-name="donatename" 
+      bindinput="bindInput"
+      placeholder="输入捐赠人名字"
+      class="fill-cate"
+    ></input>
+    <input
+      value="{{donateword}}"
+      data-name="donateword" 
+      bindinput="bindInput"
+      placeholder="输入捐赠人留言"
+      class="fill-cate"
+    ></input>
+    <picker
+      mode="date"
+      value="{{donateTime}}"
+      bindchange="bindDonateTimeChange"
+      start="{{defaultExpire}}"
+      class="fill-cate"
+    >
+      <view class="expired" style="margin-right: 0;">{{donateTime || '选择捐赠日期'}}</view>
+    </picker>
+    <view class='list-item-btn' style="color: #4fd69c;" bindtap="confirmDonate" wx:if="{{!loadingDonate}}">确认捐赠信息</view>
+    <view class='list-item-btn' style="color: #4fd69c;" wx:else>设置捐赠信息中...</view>
     <view class='list-item-btn' bindtap="closeDialog" style="border-bottom: none;">取消</view>
   </view>
 </dialog>
