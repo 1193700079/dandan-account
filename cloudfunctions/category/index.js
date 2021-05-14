@@ -68,6 +68,7 @@ exports.main = async (event) => {
         }
         const updateRes = await db.collection('DANDAN_NOTE')
           .where({
+            openId: wxContext.OPENID,
             categoryId: id,
             isDel: false,
           }).update({
@@ -151,7 +152,7 @@ exports.main = async (event) => {
     if (event.mode === 'getCategoriesByParentCIDAndOpenId') {
       const res = await db.collection('DANDAN_NOTE_CATEGORY')
         .where({
-          openId: (OPENID||wxContext.OPENID),
+          openId: (OPENID || wxContext.OPENID),
           type: 1,
           parentId: id,
           isDel: false,
